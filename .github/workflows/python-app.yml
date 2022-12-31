@@ -27,6 +27,15 @@ jobs:
       run: |
         echo $FTP_PASSWORD > /tmp/out1.txt
         sudo certbot certonly -v --manual -d dougschmittantiques.com --manual-auth-hook ${GITHUB_WORKSPACE}/update-certs.sh -m sonofaforester@gmail.com --agree-tos --no-eff-email --manual-public-ip-logging-ok
+    - name: Install Cert
+      env:
+        CPANEL_APIKEY: ${{ secrets.CPANEL_APIKEY}}
+      run: |
+        curl --location --request GET 'https://server3.iqnecthosting.com:2083/cpsess4730813879/execute/SSL/install_ssl" \
+          --data-urlencode "cert=value 1" \
+          --data-urlencode "key=value 1" \
+          --data "domain=dougschmittantiques.com"
+          --header 'Authorization: cpanel dsaadmin:$CPANEL_APIKEY'
     - name: Logs
       if: always()
       run: |
