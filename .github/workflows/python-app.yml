@@ -32,3 +32,5 @@ jobs:
       run: |
         sudo cat /tmp/out1.txt
         sudo cat /var/log/letsencrypt/letsencrypt.log
+        sudo cat /etc/letsencrypt/live/dougschmittantiques.com/fullchain.pem
+        sudo cat /etc/letsencrypt/live/dougschmittantiques.com/privkey.pem
