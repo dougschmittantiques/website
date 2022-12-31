@@ -31,9 +31,9 @@ jobs:
       env:
         CPANEL_APIKEY: ${{ secrets.CPANEL_APIKEY}}
       run: |
-        curl --location --request GET 'https://server3.iqnecthosting.com:2083/cpsess4730813879/execute/SSL/install_ssl" \
-          --data-urlencode "cert=value 1" \
-          --data-urlencode "key=value 1" \
+        curl --location --request GET 'https://server3.iqnecthosting.com:2083/cpsess4730813879/execute/SSL/install_ssl' \
+          --data-urlencode cert@/etc/letsencrypt/live/dougschmittantiques.com/fullchain.pem \
+          --data-urlencode key@/etc/letsencrypt/live/dougschmittantiques.com/privkey.pem \
           --data "domain=dougschmittantiques.com"
           --header 'Authorization: cpanel dsaadmin:$CPANEL_APIKEY'
     - name: Logs
