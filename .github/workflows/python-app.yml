@@ -31,7 +31,7 @@ jobs:
       env:
         CPANEL_APIKEY: ${{ secrets.CPANEL_APIKEY}}
       run: |
-        curl --location --request GET 'https://server3.iqnecthosting.com:2083/cpsess4730813879/execute/SSL/install_ssl' \
+        sudo curl --location --request GET 'https://server3.iqnecthosting.com:2083/cpsess4730813879/execute/SSL/install_ssl' \
           --data-urlencode cert@/etc/letsencrypt/live/wp.dougschmittantiques.com/fullchain.pem \
           --data-urlencode key@/etc/letsencrypt/live/wp.dougschmittantiques.com/privkey.pem \
           --data "domain=wp.dougschmittantiques.com"
