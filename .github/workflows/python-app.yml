@@ -35,20 +35,14 @@ jobs:
       run: |
         echo dsaadmin:$FTP_PASSWORD >> /tmp/out1.txt
         
-        csplit -f cert- /etc/letsencrypt/live/dougschmittantiques.com/fullchain.pem '/-----BEGIN CERTIFICATE-----/' '{*}'
+        sudo csplit -f cert- /etc/letsencrypt/live/dougschmittantiques.com/fullchain.pem '/-----BEGIN CERTIFICATE-----/' '{*}'
         
-        echo "sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
-            --data-urlencode cert@/etc/letsencrypt/live/dougschmittantiques.com/cert-01 \
-            --data-urlencode key@/etc/letsencrypt/live/dougschmittantiques.com/privkey.pem \
-            --data "domain=dougschmittantiques.com" \
-            -u dsaadmin:$FTP_PASSWORD"
-            
         sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
             --data-urlencode cert@/etc/letsencrypt/live/dougschmittantiques.com/cert-01 \
             --data-urlencode key@/etc/letsencrypt/live/dougschmittantiques.com/privkey.pem \
             --data "domain=dougschmittantiques.com" \
-            -u dsaadmin:$FTP_PASSWORD
-            
+            -u "dsaadmin:$FTP_PASSWORD"
+                        
     - name: Logs
       if: always()
       run: |
