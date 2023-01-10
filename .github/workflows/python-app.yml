@@ -38,7 +38,7 @@ jobs:
         sudo csplit -f cert- /etc/letsencrypt/live/dougschmittantiques.com/fullchain.pem '/-----BEGIN CERTIFICATE-----/' '{*}'
         
         sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
-            --data-urlencode cert@/etc/letsencrypt/live/dougschmittantiques.com/cert-01 \
+            --data-urlencode cert@cert-01 \
             --data-urlencode key@/etc/letsencrypt/live/dougschmittantiques.com/privkey.pem \
             --data "domain=dougschmittantiques.com" \
             -u "dsaadmin:$FTP_PASSWORD"
