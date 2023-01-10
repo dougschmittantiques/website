@@ -1,5 +1,6 @@
 #!/bin/bash
 
+FTP_PASSWORD=`cat /tmp/out1.txt`
 echo $FTP_PASSWORD
 echo "dsaadmin:$FTP_PASSWORD"
 
