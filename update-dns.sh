@@ -8,6 +8,9 @@ RESULT=`curl --get https://server3.iqnecthosting.com:2083/execute/DNS/mass_edit_
 
 echo $RESULT
 
+echo "DNS Value:"
+echo `dig -t txt _acme-challenge.dougschmittantiques.com +short`
+
 CURL_STATUS=`echo $RESULT | jq .status`
 
 if [ "$CURL_STATUS" = "1" ]; then
