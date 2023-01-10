@@ -3,6 +3,28 @@
 # Scp images to server: scp -rp * root@172.28.195.229:/var/www/wordpress/wp-content/images/
 # Register all media:  for i in {0..99}; do sudo wp media import $i/* --allow-root --path=/var/www/html; rm -r $i; done
 
+
+# Product	Reason for failure
+# RANSOM & RANDOLPH OAK DENTAL CABINET W/ SWING OUT DRAWERS, SKU 145907630	Unable to use image "rrdentalcabinetfinished".
+# Ransom & Randolph Dental Cabinet, SKU 9224967905	Unable to use image "rrdentalcabinet3finished".
+# Rocky Mountain Motorcycle Trip, SKU 8790339882	Unable to use image "bikes-trucks-ect__Tonys-motorcycle-trip__Roll1__0334537-R1-044-20A".
+# Ransom & Randolph Co. Oak Dental Cabinet, SKU 2341671537	Unable to use image "dental-doctors-cabinets__rrdentalcabca".
+# Ransom & Randolph Co. Mahogany Dental Cabinet - Model #75, SKU 648106962	Unable to use image "dental-doctors-cabinets__rrcabinetno75__rrdentalcabinetcatalog".
+# Ransom & Randolph Co. Oak Dental Cabinet - Model #75, SKU 4390955373	Unable to use image "dental-doctors-cabinets__rrcabinetno75__rrdentalcabinetcatalog".
+# Oak Ransom & Randolph Co. Dental Cabinet, SKU 7398481827	Unable to use image "dental-doctors-cabinets__oakrrbest__rrcabinet65".
+# Oak Ransom & Randolph Dental Cabinet - Cabinet #65 , SKU 72723008	Unable to use image "dental-doctors-cabinets__rrcabinet65wisconsin__rrcabinet65".
+# Oak Ransom & Randolph Dental Cabinet - Cabinet #65 , SKU 4490855579	Unable to use image "dental-doctors-cabinets__rrcabinet65wisconsin__rrcabinet65".
+# Oak Ransom & Randolph Dental Cabinet - Cabinet #65 , SKU 3761835939	Unable to use image "dental-doctors-cabinets__rrcabinet65wisconsin__rrcabinet65".
+# Ransom & Randolph Co. Oak Dental Cabinet - Model #75, SKU 8811064219	Unable to use image "dental-doctors-cabinets__rrcabinetno75__rrdentalcabinetcatalog".
+# Ransom & Randolph Co. Oak Dental Cabinet - Model #75, SKU 1991272804	Unable to use image "dental-doctors-cabinets__rrcabinetno75__rrdentalcabinetcatalog".
+# Ransom & Randolph Co. Oak Dental Cabinet - Model #75, SKU 8780776254	Unable to use image "dental-doctors-cabinets__rrcabinetno75__rrdentalcabinetcatalog".
+# Ransom & Randolph Co. Oak Dental Cabinet - Model #75, SKU 7411517735	Unable to use image "dental-doctors-cabinets__rrcabinetno75__rrdentalcabinetcatalog".
+# Mahogany Ransom & Randolph Dental Cabinet - Cabinet #65 , SKU 2700932414	Unable to use image "dental-doctors-cabinets__rrcabinet65wisconsin__rrcabinet65".
+# Ransom & Randolph Co. Oak Dental Cabinet - Model #75, SKU 512057278	Unable to use image "dental-doctors-cabinets__rrcabinetno75__rrdentalcabinetcatalog".
+# Mommy, SKU 8233297617	Unable to use image "Hunters-pages__1st_year-windex-pic__h-sleep-in-hugster-2".
+# Oak Stick & Ball Hanging Hat Rack with Beveled Mirror, SKU 1732694756	Unable to use image "specialty-items__stickballradks2018__DSC00001".
+# Oak Stick & Ball Hanging Magazine Rack, SKU 744640053	Unable to use image "specialty-items__stickballradks2018__DSC00004".
+# Siegel, SKU 1584917765	Unable to use image "Siegel".
 import os
 import sys
 from pathlib import Path
@@ -121,7 +143,7 @@ for file in result:
         wp_url = title.replace(" & ","-").replace(" - ","-").replace("'","-").replace("(","").replace(")","").replace(" ","-").replace("%20","-").replace(".","").replace("\"","").replace("/","").replace("#","").lower();
         
 
-        redirectOut.write(f'Redirect 301 "/{"/".join(file.parts[3:])}" /?product={wp_url}\n')
+        redirectOut.write(f'"/{"/".join(file.parts[3:])}",/product/{wp_url}/\n')
 
 
 folderOut.close()
