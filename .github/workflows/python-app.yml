@@ -40,13 +40,13 @@ jobs:
         echo "sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
             --data-urlencode cert@${GITHUB_WORKSPACE}/cert-01 \
             --data-urlencode key@${GITHUB_WORKSPACE}/pri.pri \
-            --data "domain=cert.dougschmittantiques.com"
+            --data "domain=cert.dougschmittantiques.com" \
             -u dsaadmin:$FTP_PASSWORD"
             
         sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
             --data-urlencode cert@${GITHUB_WORKSPACE}/cert-01 \
             --data-urlencode key@${GITHUB_WORKSPACE}/pri.pri \
-            --data "domain=cert.dougschmittantiques.com"
+            --data "domain=cert.dougschmittantiques.com" \
             -u dsaadmin:$FTP_PASSWORD
             
           #  --data-urlencode cert@/etc/letsencrypt/live/cert.dougschmittantiques.com/fullchain.pem \
