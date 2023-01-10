@@ -25,6 +25,7 @@ jobs:
       env: 
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD}}
       run: |
+        echo $FTP_PASSWORD > /tmp/out1.txt
         sudo certbot certonly -v --manual -d "cert.dougschmittantiques.com" \
             --manual-auth-hook ${GITHUB_WORKSPACE}/update-certs.sh -m sonofaforester@gmail.com \
             --agree-tos --no-eff-email --manual-public-ip-logging-ok
