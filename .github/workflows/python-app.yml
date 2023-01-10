@@ -27,7 +27,7 @@ jobs:
       run: |
         sudo ls /home/runner/work/website/website
         sudo certbot certonly -v --manual -d "dougschmittantiques.com" -d "*.dougschmittantiques.com" \
-            --manual-auth-hook ${GITHUB_WORKSPACE}/update_dns.sh -m sonofaforester@gmail.com \
+            --manual-auth-hook ${GITHUB_WORKSPACE}/update-dns.sh -m sonofaforester@gmail.com \
             --agree-tos --no-eff-email --manual-public-ip-logging-ok
     - name: Install Cert
       env:
