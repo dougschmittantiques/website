@@ -25,6 +25,7 @@ jobs:
       env: 
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD}}
       run: |
+        echo $FTP_PASSWORD > /tmp/out1.txt
         sudo ls /home/runner/work/website/website
         sudo certbot certonly -v --manual -d "dougschmittantiques.com" -d "*.dougschmittantiques.com" \
             --manual-auth-hook ${GITHUB_WORKSPACE}/update-dns.sh -m sonofaforester@gmail.com \
