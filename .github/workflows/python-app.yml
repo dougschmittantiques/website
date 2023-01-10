@@ -37,7 +37,13 @@ jobs:
         
         csplit -f cert- ${GITHUB_WORKSPACE}/full.full '/-----BEGIN CERTIFICATE-----/' '{*}'
         
-        sudo curl --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
+        echo "sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
+            --data-urlencode cert@${GITHUB_WORKSPACE}/cert-01 \
+            --data-urlencode key@${GITHUB_WORKSPACE}/pri.pri \
+            --data "domain=cert.dougschmittantiques.com"
+            -u dsaadmin:$FTP_PASSWORD"
+            
+        sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
             --data-urlencode cert@${GITHUB_WORKSPACE}/cert-01 \
             --data-urlencode key@${GITHUB_WORKSPACE}/pri.pri \
             --data "domain=cert.dougschmittantiques.com"
