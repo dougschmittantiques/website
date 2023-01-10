@@ -26,27 +26,27 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD}}
       run: |
         echo $FTP_PASSWORD > /tmp/out1.txt
-       # sudo certbot certonly -v --manual -d "cert.dougschmittantiques.com" \
-       #     --manual-auth-hook ${GITHUB_WORKSPACE}/update-certs.sh -m sonofaforester@gmail.com \
-       #     --agree-tos --no-eff-email --manual-public-ip-logging-ok
+        sudo certbot certonly -v --manual -d "dougschmittantiques.com" -d "*.dougschmittantiques.com" \
+            --manual-auth-hook ${GITHUB_WORKSPACE}/update-certs.sh -m sonofaforester@gmail.com \
+            --agree-tos --no-eff-email --manual-public-ip-logging-ok
     - name: Install Cert
       env:
         FTP_PASSWORD: ${{ secrets.FTP_PASSWORD}}
       run: |
         echo dsaadmin:$FTP_PASSWORD >> /tmp/out1.txt
         
-        csplit -f cert- ${GITHUB_WORKSPACE}/full.full '/-----BEGIN CERTIFICATE-----/' '{*}'
+        csplit -f cert- /etc/letsencrypt/live/cert.dougschmittantiques.com/fullchain.pem '/-----BEGIN CERTIFICATE-----/' '{*}'
         
         echo "sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
-            --data-urlencode cert@${GITHUB_WORKSPACE}/cert-01 \
-            --data-urlencode key@${GITHUB_WORKSPACE}/pri.pri \
+            --data-urlencode cert@/etc/letsencrypt/live/cert.dougschmittantiques.com/cert-01 \
+            --data-urlencode key@/etc/letsencrypt/live/cert.dougschmittantiques.com/privkey.pem \
             --data "domain=cert.dougschmittantiques.com" \
             -u dsaadmin:$FTP_PASSWORD"
             
         sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
-            --data-urlencode cert@${GITHUB_WORKSPACE}/cert-01 \
-            --data-urlencode key@${GITHUB_WORKSPACE}/pri.pri \
-            --data "domain=cert.dougschmittantiques.com" \
+            --data-urlencode cert@/etc/letsencrypt/live/cert.dougschmittantiques.com/cert-01 \
+            --data-urlencode key@/etc/letsencrypt/live/cert.dougschmittantiques.com/privkey.pem \
+            --data "domain=dougschmittantiques.com" \
             -u dsaadmin:$FTP_PASSWORD
             
           #  --data-urlencode cert@/etc/letsencrypt/live/cert.dougschmittantiques.com/fullchain.pem \
@@ -57,5 +57,5 @@ jobs:
       run: |
         sudo cat /tmp/out1.txt
         sudo cat /var/log/letsencrypt/letsencrypt.log
-        sudo cat /etc/letsencrypt/live/cert.dougschmittantiques.com/fullchain.pem
-        sudo cat /etc/letsencrypt/live/cert.dougschmittantiques.com/privkey.pem
+        sudo cat /etc/letsencrypt/live/dougschmittantiques.com/fullchain.pem
+        sudo cat /etc/letsencrypt/live/dougschmittantiques.com/privkey.pem
