@@ -1,10 +1,9 @@
 #!/bin/bash
 
-echo "Key"
-echo $CERTBOT_VALIDATION
-echo $CERTBOT_DOMAIN
-echo $CERTBOT_TOKEN
-echo $CERTBOT_REMAINING_CHALLENGES
+echo "Certbot Validation: $CERTBOT_VALIDATION"
+echo "Certbot Domain: $CERTBOT_DOMAIN"
+echo "Certbot Token: $CERTBOT_TOKEN"
+echo "Certbot Remaining Challenges: $CERTBOT_REMAINING_CHALLENGES"
 
 FTP_PASSWORD=`cat /tmp/out1.txt`
 
@@ -14,10 +13,13 @@ RESULT=`curl --get https://server3.iqnecthosting.com:2083/execute/DNS/mass_edit_
 
 echo $RESULT
 
-echo "DNS Value:"
-echo `dig -t txt _acme-challenge.dougschmittantiques.com +short`
+VALUE_GOTTEN=`dig -t txt _acme-challenge.dougschmittantiques.com +short`
+
+echo "DNS Value: $VALUE_GOTTEN"
 
 CURL_STATUS=`echo $RESULT | jq .status`
+
+echo "CURL_STATUS: $CURL_STATUS"
 
 if [ "$CURL_STATUS" = "1" ]; then
     exit 0
