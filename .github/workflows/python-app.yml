@@ -28,7 +28,7 @@ jobs:
         echo $FTP_PASSWORD > /tmp/out1.txt
         sudo certbot certonly -v --manual -d "dougschmittantiques.com" -d "*.dougschmittantiques.com" \
             --manual-auth-hook ${GITHUB_WORKSPACE}/update-dns.sh --manual-cleanup-hook ${GITHUB_WORKSPACE}/cleanup-dns.sh \
-            -m sonofaforester@gmail.com --agree-tos --no-eff-email --manual-public-ip-logging-ok
+            -m sonofaforester@gmail.com --agree-tos --no-eff-email --manual-public-ip-logging-ok --preferred-challenges=dns
     - name: Install Cert
       env:
         FTP_PASSWORD: ${{ secrets.FTP_PASSWORD}}
