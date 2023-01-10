@@ -35,22 +35,19 @@ jobs:
       run: |
         echo dsaadmin:$FTP_PASSWORD >> /tmp/out1.txt
         
-        csplit -f cert- /etc/letsencrypt/live/cert.dougschmittantiques.com/fullchain.pem '/-----BEGIN CERTIFICATE-----/' '{*}'
+        csplit -f cert- /etc/letsencrypt/live/dougschmittantiques.com/fullchain.pem '/-----BEGIN CERTIFICATE-----/' '{*}'
         
         echo "sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
-            --data-urlencode cert@/etc/letsencrypt/live/cert.dougschmittantiques.com/cert-01 \
-            --data-urlencode key@/etc/letsencrypt/live/cert.dougschmittantiques.com/privkey.pem \
-            --data "domain=cert.dougschmittantiques.com" \
+            --data-urlencode cert@/etc/letsencrypt/live/dougschmittantiques.com/cert-01 \
+            --data-urlencode key@/etc/letsencrypt/live/dougschmittantiques.com/privkey.pem \
+            --data "domain=dougschmittantiques.com" \
             -u dsaadmin:$FTP_PASSWORD"
             
         sudo curl -v --get 'https://server3.iqnecthosting.com:2083/execute/SSL/install_ssl' \
-            --data-urlencode cert@/etc/letsencrypt/live/cert.dougschmittantiques.com/cert-01 \
-            --data-urlencode key@/etc/letsencrypt/live/cert.dougschmittantiques.com/privkey.pem \
+            --data-urlencode cert@/etc/letsencrypt/live/dougschmittantiques.com/cert-01 \
+            --data-urlencode key@/etc/letsencrypt/live/dougschmittantiques.com/privkey.pem \
             --data "domain=dougschmittantiques.com" \
             -u dsaadmin:$FTP_PASSWORD
-            
-          #  --data-urlencode cert@/etc/letsencrypt/live/cert.dougschmittantiques.com/fullchain.pem \
-          #  --data-urlencode key@/etc/letsencrypt/live/cert.dougschmittantiques.com/privkey.pem \
             
     - name: Logs
       if: always()
