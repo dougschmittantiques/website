@@ -4,7 +4,8 @@
 name: Update Certs
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "1 1 1 * *"
 
 permissions:
   contents: read
