@@ -26,9 +26,20 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD}}
       run: |
         echo $FTP_PASSWORD > /tmp/out1.txt
-        sudo certbot certonly -v --manual -d dougschmittantiques.com --manual-auth-hook ${GITHUB_WORKSPACE}/update-certs.sh -m sonofaforester@gmail.com --agree-tos --no-eff-email --manual-public-ip-logging-ok
+        sudo certbot certonly -v --manual -d wp.dougschmittantiques.com --manual-auth-hook ${GITHUB_WORKSPACE}/update-certs.sh -m sonofaforester@gmail.com --agree-tos --no-eff-email --manual-public-ip-logging-ok
+    - name: Install Cert
+      env:
+        CPANEL_APIKEY: ${{ secrets.CPANEL_APIKEY}}
+      run: |
+        sudo curl -v --get 'https://server3.iqnecthosting.com:2083/cpsess4730813879/execute/SSL/install_ssl' \
+          --data-urlencode cert@/etc/letsencrypt/live/wp.dougschmittantiques.com/fullchain.pem \
+          --data-urlencode key@/etc/letsencrypt/live/wp.dougschmittantiques.com/privkey.pem \
+          --data "domain=wp.dougschmittantiques.com"
+          --header 'Authorization: cpanel dsaadmin:$CPANEL_APIKEY'
     - name: Logs
       if: always()
       run: |
         sudo cat /tmp/out1.txt
         sudo cat /var/log/letsencrypt/letsencrypt.log
+        sudo cat /etc/letsencrypt/live/wp.dougschmittantiques.com/fullchain.pem
+        sudo cat /etc/letsencrypt/live/wp.dougschmittantiques.com/privkey.pem
