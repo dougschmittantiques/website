@@ -12,7 +12,7 @@ DOMAIN_SERIAL=`curl --get https://server3.iqnecthosting.com:2083/execute/DNS/par
 RESULT=`curl --get https://server3.iqnecthosting.com:2083/execute/DNS/mass_edit_zone -u "dsaadmin:$FTP_PASSWORD" --data "zone=dougschmittantiques.com" --data "serial=$DOMAIN_SERIAL" --data "add={\"dname\":\"_acme-challenge\",\"ttl\":3600,\"record_type\":\"TXT\",\"data\":[\"$CERTBOT_VALIDATION\"]}"`
 echo "Curl results: $RESULT"
 
-sleep 10
+sleep 300
 
 VALUE_GOTTEN=`dig -t txt _acme-challenge.dougschmittantiques.com +short`
 echo "DNS Value: $VALUE_GOTTEN"
